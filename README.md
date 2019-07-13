@@ -4,6 +4,11 @@
 1. FreeBSD, not your usual GNU Linux! Hence,
 	* **tcsh** instead of **bash**
 2. log:pass : ```comp6447:comp6447```
+3. How to connect FreeBSD to your local LAN&NAT, as a real machine?
+	* VirtualBox -> comp6447 1 -> settings (with)
+	* -> network -> Attached to: "Bridged adapter"
+	* -> network -> Name: (your real internet adapter)
+	* (make sure you assign a static intranet IP address on the router)
 
 ## Recon
 ### Nmap
