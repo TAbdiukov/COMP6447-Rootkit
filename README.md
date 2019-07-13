@@ -1,5 +1,10 @@
 # Rootkit
 
+## VM
+1. FreeBSD, not your usual GNU Linux! Hence,
+	* **tcsh** instead of **bash**
+2. log:pass : ```comp6447:comp6447```
+
 ## Recon
 ### Nmap
 Ports found:
@@ -9,7 +14,7 @@ Type | N | Service | Desc
 TCP | 22 | SSH | Putty
 UDP | 123 | NTP | Clock sync
 
-Look at: **UDP | 123 | NTP | Clock sync** ! Seems **very** exploitable
+Look at: **UDP | 123 | NTP | Clock sync** ! Seems **very** exploitable! Moreover, because nmap by default never scans UDP ports, it's unlikely this idea will be copied by the other groups
 
 ### Wireshark
 * Constantly tries to sync time with "0.freebsd.pool.ntp.org" (and others)
