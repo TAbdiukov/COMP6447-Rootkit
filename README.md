@@ -20,11 +20,12 @@ Look at: **UDP | 123 | NTP | Clock sync** ! Seems **very** exploitable! Moreover
 * Constantly tries to sync time with "0.freebsd.pool.ntp.org" (and others)
 * Tries to connect with "comp6447-rootkit-dev.Home" (sic).
     ![proof](./recon/misc/ws2.PNG)
+	
     Host doesn't exist and **can't** exist on the internet (see ```.\recon\dotHome attack``` )
 
 ### Other
-
 * One instance of shellshock attack appears possible! Check ```./recon/shellshock.sh```
+* Check out the startup video! University of ~~New South Wales~~ California
 
 ## Rootkit idea
 ### Patch OS
