@@ -1,5 +1,8 @@
 # Rootkit
 
+## Friendly repos
+* [Basic rootkit for FreeBSD OS, written for UNSW COMP6447](https://github.com/orf53975/FreeBSDRootkit_PUBLIC)
+
 ## VM
 1. FreeBSD, not your usual GNU Linux! Hence,
 	* **tcsh** instead of **bash**
