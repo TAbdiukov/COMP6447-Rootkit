@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet href="file:///E:/Program Files (x86)/Nmap/nmap.xsl" type="text/xsl"?><nmaprun start="1563384037" profile_name="" xmloutputversion="1.04" scanner="nmap" version="7.70" startstr="Thu Jul 18 03:20:37 2019" args="nmap -sU -p 1025 -T5 -A -v -Pn 192.168.20.19 --disable-arp-ping"><scaninfo services="1025" protocol="udp" numservices="1" type="udp"></scaninfo><verbose level="1"></verbose><debugging level="0"></debugging><output type="interactive">Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-18 03:20 AUS Eastern Standard Time
+NSE: Loaded 148 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 03:20
+Completed NSE at 03:20, 0.00s elapsed
+Initiating NSE at 03:20
+Completed NSE at 03:20, 0.00s elapsed
+Initiating Parallel DNS resolution of 1 host. at 03:20
+Completed Parallel DNS resolution of 1 host. at 03:20, 5.52s elapsed
+Initiating UDP Scan at 03:20
+Scanning timvm-VirtualBox (192.168.20.19) [1 port]
+Completed UDP Scan at 03:20, 0.69s elapsed (1 total ports)
+Initiating Service scan at 03:20
+Scanning 1 service on timvm-VirtualBox (192.168.20.19)
+Discovered open port 1025/udp on 192.168.20.19
+Discovered open|filtered port 1025/udp on timvm-VirtualBox (192.168.20.19) is actually open
+Completed Service scan at 03:22, 97.51s elapsed (1 service on 1 host)
+Initiating OS detection (try #1) against timvm-VirtualBox (192.168.20.19)
+Retrying OS detection (try #2) against timvm-VirtualBox (192.168.20.19)
+NSE: Script scanning 192.168.20.19.
+Initiating NSE at 03:22
+Completed NSE at 03:22, 0.01s elapsed
+Initiating NSE at 03:22
+Completed NSE at 03:22, 0.01s elapsed
+Nmap scan report for timvm-VirtualBox (192.168.20.19)
+Host is up.
+
+PORT     STATE SERVICE    VERSION
+1025/udp open  blackjack?
+| fingerprint-strings: 
+|   AFSVersionRequest: 
+|     Your data was 32 bytes long
+|   Citrix, DNSVersionBindReq: 
+|     Your data was 30 bytes long
+|   DNS-SD: 
+|     Your data was 46 bytes long
+|   DNSStatusRequest: 
+|     Your data was 12 bytes long
+|   DTLSSessionReq: 
+|     Your data was 67 bytes long
+|   Help: 
+|     Your data was 8 bytes long
+|   Kerberos: 
+|     Your data was 113 bytes long
+|   NBTStat: 
+|     Your data was 50 bytes long
+|   NTPRequest: 
+|     Your data was 48 bytes long
+|   NetMotionMobility: 
+|     Your data was 64 bytes long
+|   QUIC: 
+|     Your data was 14 bytes long
+|   RPCCheck: 
+|     Your data was 40 bytes long
+|   SIPOptions: 
+|     Your data was 229 bytes long
+|   SNMPv1public: 
+|     Your data was 51 bytes long
+|   SNMPv3GetRequest: 
+|     Your data was 60 bytes long
+|   Sqlping: 
+|     Your data was 1 bytes long
+|   sybaseanywhere: 
+|     Your data was 61 bytes long
+|   xdmcp: 
+|_    Your data was 7 bytes long
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port1025-UDP:V=7.70%I=7%D=7/18%Time=5D2F58F4%P=i686-pc-windows-windows%
+SF:r(RPCCheck,1B,"Your\x20data\x20was\x2040\x20bytes\x20long")%r(DNSVersio
+SF:nBindReq,1B,"Your\x20data\x20was\x2030\x20bytes\x20long")%r(DNSStatusRe
+SF:quest,1B,"Your\x20data\x20was\x2012\x20bytes\x20long")%r(NBTStat,1B,"Yo
+SF:ur\x20data\x20was\x2050\x20bytes\x20long")%r(Help,1A,"Your\x20data\x20w
+SF:as\x208\x20bytes\x20long")%r(SIPOptions,1C,"Your\x20data\x20was\x20229\
+SF:x20bytes\x20long")%r(Sqlping,1A,"Your\x20data\x20was\x201\x20bytes\x20l
+SF:ong")%r(NTPRequest,1B,"Your\x20data\x20was\x2048\x20bytes\x20long")%r(S
+SF:NMPv1public,1B,"Your\x20data\x20was\x2051\x20bytes\x20long")%r(SNMPv3Ge
+SF:tRequest,1B,"Your\x20data\x20was\x2060\x20bytes\x20long")%r(xdmcp,1A,"Y
+SF:our\x20data\x20was\x207\x20bytes\x20long")%r(AFSVersionRequest,1B,"Your
+SF:\x20data\x20was\x2032\x20bytes\x20long")%r(DNS-SD,1B,"Your\x20data\x20w
+SF:as\x2046\x20bytes\x20long")%r(Citrix,1B,"Your\x20data\x20was\x2030\x20b
+SF:ytes\x20long")%r(Kerberos,1C,"Your\x20data\x20was\x20113\x20bytes\x20lo
+SF:ng")%r(sybaseanywhere,1B,"Your\x20data\x20was\x2061\x20bytes\x20long")%
+SF:r(NetMotionMobility,1B,"Your\x20data\x20was\x2064\x20bytes\x20long")%r(
+SF:DTLSSessionReq,1B,"Your\x20data\x20was\x2067\x20bytes\x20long")%r(QUIC,
+SF:1B,"Your\x20data\x20was\x2014\x20bytes\x20long");
+Too many fingerprints match this host to give specific OS details
+
+TRACEROUTE
+HOP RTT ADDRESS
+1   --  timvm-VirtualBox (192.168.20.19)
+
+NSE: Script Post-scanning.
+Initiating NSE at 03:22
+Completed NSE at 03:22, 0.00s elapsed
+Initiating NSE at 03:22
+Completed NSE at 03:22, 0.00s elapsed
+Read data files from: E:\Program Files (x86)\Nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 111.61 seconds
+           Raw packets sent: 50 (6.728KB) | Rcvd: 3 (180B)
+</output><host comment=""><status state="up"></status><address addrtype="ipv4" vendor="" addr="192.168.20.19"></address><hostnames><hostname type="PTR" name="timvm-VirtualBox"></hostname></hostnames><ports><port protocol="udp" portid="1025"><state reason="udp-response" state="open" reason_ttl="0"></state><service method="table" conf="3" name="blackjack"></service></port></ports><os></os><uptime lastboot="" seconds=""></uptime><tcpsequence index="" values="" difficulty=""></tcpsequence><ipidsequence values="" class=""></ipidsequence><tcptssequence values="" class=""></tcptssequence><trace port="" proto=""><hop rtt="--" host="timvm-VirtualBox" ipaddr="192.168.20.19" ttl="1"></hop></trace></host><runstats><finished timestr="Thu Jul 18 03:22:28 2019" time="1563384148"></finished><hosts down="0" total="1" up="1"></hosts></runstats></nmaprun>
