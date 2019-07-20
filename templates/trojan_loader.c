@@ -1,9 +1,9 @@
-#include <errno.h>
-#include <fcntl.h>
-#include <kvm.h>
-#include <limits.h>
-#include <nlist.h>
-#include <stdio.h>
+#include <sys/errno.h>
+#include <sys/fcntl.h>
+//#include <lib/kvm.h>
+#include <sys/limits.h>
+//#include <sys/nlist.h>
+#include <sys/stdio.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>

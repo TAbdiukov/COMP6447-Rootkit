@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <sys/stdio.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <sys/types.h>

