@@ -23,7 +23,7 @@
 
 #define ORIGINAL "/sbin/test"
 #define TROJAN "/sbin/trojan_test"
-#define T_NAME "assignHid"
+#define T_NAME "hiding"
 #define VERSION "assignHid.ko"
 /*
 * The following is the list of variables you need to reference in order
