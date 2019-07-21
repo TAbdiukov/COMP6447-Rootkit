@@ -1,0 +1,140 @@
+timvm@timvm-VirtualBox:~/udp$ python3 udp-server.py 
+OK running
+Connection from Client('192.168.20.4', 49768) says,
+r����|
+Connection from Client('192.168.20.4', 49768) says,
+versionbind
+Connection from Client('192.168.20.4', 49768) says,
+
+Connection from Client('192.168.20.4', 49768) says,
+�� CKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!
+Connection from Client('192.168.20.4', 49768) says,
+help
+
+
+Connection from Client('192.168.20.4', 49768) says,
+OPTIONS sip:nm SIP/2.0
+Via: SIP/2.0/UDP nm;branch=foo;rport
+From: <sip:nm@nm>;tag=root
+To: <sip:nm2@nm2>
+Call-ID: 50000
+CSeq: 42 OPTIONS
+Max-Forwards: 70
+Content-Length: 0
+Contact: <sip:nm@nm>
+Accept: application/sdp
+
+
+Connection from Client('192.168.20.4', 49768) says,
+
+Connection from Client('192.168.20.4', 49768) says,
+���O#Kq�R�
+Connection from Client('192.168.20.4', 49768) says,
+0�/public�� L3�V0�0�
+                               +
+Connection from Client('192.168.20.4', 49768) says,
+0:0Ji��00�
+                                    7�0
+Connection from Client('192.168.20.4', 49768) says,
+
+Connection from Client('192.168.20.4', 49768) says,
+�e
+Connection from Client('192.168.20.4', 49768) says,
+	_services_dns-sd_udplocal
+                                  
+Connection from Client('192.168.20.4', 49768) says,
+0���
+Connection from Client('192.168.20.4', 49768) says,
+j�n0�k��
+��^0\�P��NM�0��0
+                          krbtgtNM�19700101000000Z����0
+Connection from Client('192.168.20.4', 49768) says,
+CONNECTIONLESS_TDS�
+Connection from Client('192.168.20.4', 49768) says,
+@P�]��(|�@�9�B7e�
+Connection from Client('192.168.20.4', 49768) says,
+��6**��|w@��"�����
+d/�"d��0/
+Connection from Client('192.168.20.4', 49768) says,
+���*���Q999
+Connection from Client('192.168.20.4', 618) says,
+�����
+^CTraceback (most recent call last):
+  File "udp-server.py", line 14, in <module>
+    data, address = sock.recvfrom(65538)
+KeyboardInterrupt
+timvm@timvm-VirtualBox:~/udp$ python3 udp-server.py 
+OK running
+Connection from Client('192.168.20.4', 59812) says,
+r����|
+Connection from Client('192.168.20.4', 59812) says,
+versionbind
+^CTraceback (most recent call last):
+  File "udp-server.py", line 14, in <module>
+    data, address = sock.recvfrom(65538)
+KeyboardInterrupt
+timvm@timvm-VirtualBox:~/udp$ python3 udp-server.py 
+OK running
+Connection from Client('192.168.20.4', 55438) says,
+r����|
+Connection from Client('192.168.20.4', 55438) says,
+versionbind
+Connection from Client('192.168.20.4', 55438) says,
+
+Connection from Client('192.168.20.4', 55438) says,
+�� CKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!
+Connection from Client('192.168.20.4', 55438) says,
+help
+
+
+Connection from Client('192.168.20.4', 55438) says,
+OPTIONS sip:nm SIP/2.0
+Via: SIP/2.0/UDP nm;branch=foo;rport
+From: <sip:nm@nm>;tag=root
+To: <sip:nm2@nm2>
+Call-ID: 50000
+CSeq: 42 OPTIONS
+Max-Forwards: 70
+Content-Length: 0
+Contact: <sip:nm@nm>
+Accept: application/sdp
+
+
+Connection from Client('192.168.20.4', 55438) says,
+
+Connection from Client('192.168.20.4', 55438) says,
+���O#Kq�R�
+Connection from Client('192.168.20.4', 55438) says,
+0�/public�� L3�V0�0�
+                               +
+Connection from Client('192.168.20.4', 55438) says,
+0:0Ji��00�
+                                    7�0
+Connection from Client('192.168.20.4', 55438) says,
+
+Connection from Client('192.168.20.4', 55438) says,
+�e
+Connection from Client('192.168.20.4', 55438) says,
+	_services_dns-sd_udplocal
+                                  
+Connection from Client('192.168.20.4', 55438) says,
+0���
+Connection from Client('192.168.20.4', 55438) says,
+j�n0�k��
+��^0\�P��NM�0��0
+                          krbtgtNM�19700101000000Z����0
+Connection from Client('192.168.20.4', 55438) says,
+CONNECTIONLESS_TDS�
+Connection from Client('192.168.20.4', 55438) says,
+@P�]��(|�@�9�B7e�
+Connection from Client('192.168.20.4', 55438) says,
+��6**��|w@��"�����
+d/�"d��0/
+Connection from Client('192.168.20.4', 55438) says,
+���*���Q999
+Connection from Client('192.168.20.4', 888) says,
+!�b���
+
+
+
+

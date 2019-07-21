@@ -1,0 +1,1 @@
+nmap -sT -sU -T5 -A -v -Pn 192.168.20.13 --disable-arp-ping
