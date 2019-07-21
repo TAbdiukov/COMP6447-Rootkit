@@ -173,7 +173,7 @@ load(struct module *module, int cmd, void *arg)
     struct linker_file *lf;
     struct module *mod;
     mtx_lock(&Giant);
-    //mtx_lock(&kld_mtx);
+    mtx_lock(&kld_mtx);
 /* Decrement the current kernel image's reference count. */
     (&linker_files)->tqh_first->refs--;
 /*
