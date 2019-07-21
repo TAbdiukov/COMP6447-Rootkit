@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <sys/types.h>
@@ -17,7 +19,7 @@ int main (int argc, char *argv[]) {
     modstat(modfind("sc_example"), &stat);
     syscall_num = stat.data.intval;
 
-    return((syscall(syscall_num, argv[]));
+    return((syscall(syscall_num, argv)));
 
 
 

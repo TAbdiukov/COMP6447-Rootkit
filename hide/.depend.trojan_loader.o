@@ -1,0 +1,13 @@
+trojan_loader.o: trojan_loader.c /usr/src/sys/sys/errno.h \
+  /usr/src/sys/sys/fcntl.h /usr/src/sys/sys/cdefs.h \
+  /usr/src/sys/sys/_types.h machine/_types.h x86/_types.h \
+  machine/_limits.h x86/_limits.h //usr/include/nlist.h \
+  /usr/src/sys/sys/nlist_aout.h //usr/include/kvm.h \
+  /usr/src/sys/sys/types.h machine/endian.h x86/endian.h \
+  /usr/src/sys/sys/_pthreadtypes.h /usr/src/sys/sys/_stdint.h \
+  /usr/src/sys/sys/select.h /usr/src/sys/sys/_sigset.h \
+  /usr/src/sys/sys/_timeval.h /usr/src/sys/sys/timespec.h \
+  /usr/src/sys/sys/_timespec.h //usr/include/limits.h \
+  /usr/src/sys/sys/limits.h /usr/src/sys/sys/syslimits.h \
+  //usr/include/stdio.h /usr/src/sys/sys/_null.h //usr/include/stdlib.h \
+  /usr/src/sys/sys/time.h //usr/include/utime.h /usr/src/sys/sys/stat.h

