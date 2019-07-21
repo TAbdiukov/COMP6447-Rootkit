@@ -24,28 +24,13 @@
 # include <config.h>
 #endif
 
-#include "ntpd.h"
-#include "ntp_io.h"
-#include "ntp_request.h"
-#include "ntp_control.h"
-#include "ntp_refclock.h"
-#include "ntp_if.h"
-#include "ntp_stdlib.h"
-#include "ntp_assert.h"
 
-#include <stdio.h>
-#include <stddef.h>
-#include <signal.h>
-#ifdef HAVE_NETINET_IN_H
-#include <netinet/in.h>
-#endif
-#include <arpa/inet.h>
-
+#include "stddef.h"
+#include "ntp_types.h"
 #include "recvbuff.h"
+#include "ntp_request.h"
 
-#ifdef KERNEL_PLL
-#include "ntp_syscall.h"
-#endif /* KERNEL_PLL */
+
 /*
  * Structure to hold request procedure information
  */
