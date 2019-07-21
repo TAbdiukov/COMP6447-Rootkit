@@ -4,8 +4,8 @@ SRCS= syscall.c
 KMOD = hook
 SRCS= hook.c
 
-KMOD= interface
-SRCS= interface.c
+#KMOD= interface
+#SRCS= interface.c
 
 KMOD = process_hiding2
 SRCS= process_hiding2.c
@@ -16,7 +16,7 @@ SRCS = port_hiding.c
 KMOD = incog3
 SRCS = incog3.c
 
-KMOD = trojan_loader
-SRCS = trojan_loader.c
+#KMOD = trojan_loader
+#SRCS = trojan_loader.c
 
 .include <bsd.kmod.mk>

