@@ -80,7 +80,7 @@ getdirentries_hook(struct thread *td, void *syscall_args)
      if (size > 0) {
          //malloc(dp, struct dirent *, size, M_TEMP, M_NOWAIT);
 	 //MALLOC_DECLARE(dirent);
-	 dp = malloc(size, 0 ,M_NOWAIT);
+	 dp = malloc(size, M_DEVBUF ,M_NOWAIT);
          copyin(uap->buf, dp, size);
          current = dp;
          count = size;
