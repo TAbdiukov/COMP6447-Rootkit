@@ -1,6 +1,6 @@
 # Rootkit
 
-FreeBSD rootkit - Application Security Assessment (COMP6447) 
+FreeBSD Rootkit implementation - Application Security Assessment (COMP6447).
 
 ## Disclaimer
 Feel free to contribute is you get something interesting! There's only two of us working on the rootkit. Im Still working on that remote backdoor.
