@@ -1,5 +1,7 @@
 # Rootkit
 
+FreeBSD rootkit - Application Security Assessment (COMP6447) 
+
 ## Disclaimer
 Feel free to contribute is you get something interesting! There's only two of us working on the rootkit. Im Still working on that remote backdoor.
 In the meantime, [Designing BSD rootkits PDF](https://github.com/colavs19/bcit-courses/raw/master/COMP%208045%20-%20Major%20Project/Reference%20Documents/Designing%20BSD%20Rootkits%20-%20An%20Introduction%20to%20Kernel%20Hacking.pdf)
