@@ -54,4 +54,4 @@ Look at: **UDP | 123 | NTP | Clock sync** ! Seems **very** exploitable! Moreover
 1. When patching the system files, make sure the jumps/return addr overwritten are made within the normal intended routines
 2. Use easy-to-scale programming language, such as Python, Java or GO
 	* Todo discuss with the assignment partner
-3. Make sure there are **no bugs** (seemingly the easiest danger by far).
+3. Make sure there are **no bugs** (seemingly the easiest threat by far).
