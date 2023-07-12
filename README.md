@@ -1,4 +1,8 @@
-# Rootkit
+![bxi.es](./misc/header.jpg)
+
+__COMP6447__: [Core](https://github.com/TAbdiukov/COMP6447-Core) | [Rootkit](https://github.com/TAbdiukov/COMP6447-Rootkit)
+
+# COMP6447-Rootkit
 
 FreeBSD Rootkit implementation - Application Security Assessment (COMP6447).
 
