@@ -1,6 +1,6 @@
 ![bxi.es](./misc/header.jpg)
 
-__COMP6447__: [Core](https://github.com/TAbdiukov/COMP6447-Core) | [Rootkit](https://github.com/TAbdiukov/COMP6447-Rootkit)
+__COMP6447__: [Core](https://github.com/TAbdiukov/COMP6447-Core) | **Rootkit**
 
 # COMP6447-Rootkit
 
